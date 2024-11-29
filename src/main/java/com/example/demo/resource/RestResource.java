@@ -4,10 +4,7 @@ import com.example.demo.details.StudentDetails;
 import com.example.demo.model.Marks;
 import com.example.demo.model.Student;
 import com.example.demo.model.Subjects;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 
@@ -35,7 +32,8 @@ public class RestResource {
         return studentDetails;
     }
 
-    @GetMapping("/getStudent")
+    @GetMapping("/getStu")
+    @ResponseBody()
     public String getStudentName() {
         return "Rubendar";
 
