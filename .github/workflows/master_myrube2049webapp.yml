@@ -37,13 +37,22 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-      
+    permissions:
+      id-token: write #This is required for requesting the JWT
+  
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: java-app
       
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0AAFCD5A451E4B6A8A056E359839D136 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_DC1F2B21D8CE45E5BC6AA484BD9172A3 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_30641053589C4BFA958D343062FDF797 }}
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
@@ -51,4 +60,4 @@ jobs:
           app-name: 'MyRube2049WebApp'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8DE1C55A3CD8407F8AC9B8371B636A59 }}
+          
