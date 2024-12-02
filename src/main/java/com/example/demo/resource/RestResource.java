@@ -32,7 +32,7 @@ public class RestResource {
     public StudentDetails getStudentDetails(@PathVariable("id") int id) {
         List<Student> students = createStudentInfo();
         StudentDetails studentDetails = processStudentsDetails(students, id);
-
+        System.out.println("Change");
         return studentDetails;
     }
 
